@@ -671,6 +671,95 @@
       .footer-top { grid-template-columns: 1fr; }
       .footer-brand { grid-column: span 1; }
     }
+    /* LIGHTBOX */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(20, 10, 4, 0.95);
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #lightbox-img {
+      max-width: 90vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+      transition: opacity 0.2s;
+    }
+
+    #lightbox-img.loading {
+      opacity: 0;
+    }
+
+    #lightbox-caption {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      font-family: sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 2.5rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    .lightbox-prev,
+    .lightbox-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: var(--white);
+      font-size: 3rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      opacity: 0.7;
+      transition: opacity 0.2s, background 0.2s;
+    }
+
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      opacity: 1;
+      background: rgba(255,255,255,0.22);
+    }
+
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+
+    .gallery-strip a { cursor: zoom-in; }
   </style>
 </head>
 <body>
@@ -712,13 +801,24 @@
   <!-- GALLERY STRIP -->
   <div id="gallery">
     <div class="gallery-strip">
-      <a href="photos/IMG_5503.jpeg"><img src="photos/IMG_5503.jpeg" alt="Oscar running in a field" /></a>
-      <a href="photos/IMG_5655.jpg"><img src="photos/IMG_5655.jpg" alt="Oscar cuddled in a lap" /></a>
-      <a href="photos/IMG_5292.jpg"><img src="photos/IMG_5292.jpg" alt="Oscar's curly coat" /></a>
-      <a href="photos/IMG_5328.jpg"><img src="photos/IMG_5328.jpg" alt="Oscar wrapped in a blanket" /></a>
-      <a href="photos/IMG_4825.jpg"><img src="photos/IMG_4825.jpg" alt="Oscar in a wheat field" /></a>
-      <a href="photos/camphoto_126398554.jpeg"><img src="photos/camphoto_126398554.jpeg" alt="Oscar face close-up" /></a>
-      <a href="photos/telegram-photo-0-5861736014164986734.jpeg"><img src="photos/telegram-photo-0-5861736014164986734.jpeg" alt="Oscar with a friend" /></a>
+      <a href="photos/IMG_5503.jpeg" class="lightbox-trigger" data-caption="Oscar running in a field"><img src="photos/IMG_5503.jpeg" alt="Oscar running in a field" /></a>
+      <a href="photos/IMG_5655.jpg" class="lightbox-trigger" data-caption="Oscar cuddled in a lap"><img src="photos/IMG_5655.jpg" alt="Oscar cuddled in a lap" /></a>
+      <a href="photos/IMG_5292.jpg" class="lightbox-trigger" data-caption="Oscar's curly coat"><img src="photos/IMG_5292.jpg" alt="Oscar's curly coat" /></a>
+      <a href="photos/IMG_5328.jpg" class="lightbox-trigger" data-caption="Oscar wrapped in a blanket"><img src="photos/IMG_5328.jpg" alt="Oscar wrapped in a blanket" /></a>
+      <a href="photos/IMG_4825.jpg" class="lightbox-trigger" data-caption="Oscar in a wheat field"><img src="photos/IMG_4825.jpg" alt="Oscar in a wheat field" /></a>
+      <a href="photos/camphoto_126398554.jpeg" class="lightbox-trigger" data-caption="Oscar face close-up"><img src="photos/camphoto_126398554.jpeg" alt="Oscar face close-up" /></a>
+      <a href="photos/telegram-photo-0-5861736014164986734.jpeg" class="lightbox-trigger" data-caption="Oscar with a friend"><img src="photos/telegram-photo-0-5861736014164986734.jpeg" alt="Oscar with a friend" /></a>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" aria-modal="true" role="dialog" aria-label="Photo viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous">&#8249;</button>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Next">&#8250;</button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption"></p>
     </div>
   </div>
 
@@ -897,5 +997,44 @@
     </div>
   </footer>
 
+  <script>
+    const lightbox     = document.getElementById('lightbox');
+    const lbImg        = document.getElementById('lightbox-img');
+    const lbCaption    = document.getElementById('lightbox-caption');
+    const triggers     = Array.from(document.querySelectorAll('.lightbox-trigger'));
+    let current        = 0;
+
+    function open(index) {
+      current = index;
+      const t = triggers[current];
+      lbImg.classList.add('loading');
+      lbImg.src = t.href;
+      lbImg.alt = t.dataset.caption;
+      lbCaption.textContent = t.dataset.caption;
+      lbImg.onload = () => lbImg.classList.remove('loading');
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function prev() { open((current - 1 + triggers.length) % triggers.length); }
+    function next() { open((current + 1) % triggers.length); }
+
+    triggers.forEach((t, i) => t.addEventListener('click', e => { e.preventDefault(); open(i); }));
+    document.getElementById('lightbox-close').addEventListener('click', close);
+    document.getElementById('lightbox-prev').addEventListener('click', prev);
+    document.getElementById('lightbox-next').addEventListener('click', next);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')      close();
+      if (e.key === 'ArrowLeft')   prev();
+      if (e.key === 'ArrowRight')  next();
+    });
+  </script>
 </body>
 </html>
