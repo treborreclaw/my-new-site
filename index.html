@@ -760,6 +760,64 @@
     .lightbox-next { right: 1.5rem; }
 
     .gallery-strip a { cursor: zoom-in; }
+
+    /* VIDEO SECTION */
+    #videos {
+      background: var(--white);
+      padding: 90px 5%;
+    }
+
+    .videos-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .videos-header .section-sub { margin: 0 auto; }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .video-card {
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--cream);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s;
+    }
+
+    .video-card:hover { transform: translateY(-4px); }
+
+    .video-card video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      background: #1a0e06;
+    }
+
+    .video-card-body {
+      padding: 1.2rem 1.5rem 1.5rem;
+    }
+
+    .video-card-body h3 {
+      font-size: 1.1rem;
+      color: var(--brown-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .video-card-body p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 680px) {
+      .videos-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -770,6 +828,7 @@
     <ul>
       <li><a href="#features">About</a></li>
       <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#videos">Videos</a></li>
       <li><a href="#pricing">Packages</a></li>
       <li><a href="#cta" class="nav-cta">Meet Oscar</a></li>
     </ul>
@@ -822,6 +881,37 @@
       <p id="lightbox-caption"></p>
     </div>
   </div>
+
+  <!-- VIDEOS -->
+  <section id="videos">
+    <div class="videos-header">
+      <div class="section-label">Oscar in Action</div>
+      <h2 class="section-title">Watch the Magic Happen</h2>
+      <p class="section-sub">Still photos can't fully capture Oscar's personality. These videos can.</p>
+    </div>
+    <div class="videos-grid">
+      <div class="video-card">
+        <video controls poster="photos/IMG_5503.jpeg" preload="none">
+          <source src="photos/IMG_4721.webm" type="video/webm">
+          <source src="photos/IMG_4721.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-body">
+          <h3>Oscar on the Move</h3>
+          <p>Catching Oscar mid-zoomies — peak poodle energy on full display.</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <video controls poster="photos/IMG_4825.jpg" preload="none">
+          <source src="photos/IMG_7522.webm" type="video/webm">
+          <source src="photos/IMG_7522.mp4" type="video/mp4">
+        </video>
+        <div class="video-card-body">
+          <h3>Adventures with Oscar</h3>
+          <p>A day in the life of the world's most enthusiastic toy poodle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- FEATURES -->
   <section id="features">
@@ -1008,7 +1098,8 @@
       { type: 'image', src: 'photos/IMG_4825.jpg' },
       { type: 'image', src: 'photos/camphoto_126398554.jpeg' },
       { type: 'image', src: 'photos/telegram-photo-0-5861736014164986734.jpeg' },
-      { type: 'video', mp4: 'photos/IMG_4721.mp4', webm: 'photos/IMG_4721.webm' }
+      { type: 'video', mp4: 'photos/IMG_4721.mp4', webm: 'photos/IMG_4721.webm' },
+      { type: 'video', mp4: 'photos/IMG_7522.mp4', webm: 'photos/IMG_7522.webm' }
     ];
     const heroImg   = document.getElementById('hero-img');
     const heroVideo = document.getElementById('hero-video');

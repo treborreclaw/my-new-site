@@ -35,7 +35,9 @@
       "Bash(/tmp/ffmpeg_bin/ffmpeg -version)",
       "Bash(/tmp/ffmpeg_bin/ffmpeg -i /Users/robertwalker/Sites/Claude/test-2/photos/IMG_4721.mov)",
       "Bash(/tmp/ffmpeg_bin/ffmpeg -i /Users/robertwalker/Sites/Claude/test-2/photos/IMG_7522.mov)",
-      "Bash(/tmp/ffmpeg_bin/ffmpeg -i /Users/robertwalker/Sites/Claude/test-2/photos/IMG_4721.mov -vf scale=1280:-2 -c:v libvpx-vp9 -crf 33 -b:v 0 -an /Users/robertwalker/Sites/Claude/test-2/photos/IMG_4721.webm)"
+      "Bash(/tmp/ffmpeg_bin/ffmpeg -i /Users/robertwalker/Sites/Claude/test-2/photos/IMG_4721.mov -vf scale=1280:-2 -c:v libvpx-vp9 -crf 33 -b:v 0 -an /Users/robertwalker/Sites/Claude/test-2/photos/IMG_4721.webm)",
+      "Bash(/tmp/ffmpeg_bin/ffmpeg -i /Users/robertwalker/Sites/Claude/test-2/photos/IMG_7522.mov -vf scale=1280:-2 -c:v libx264 -crf 23 -preset slow -profile:v high -pix_fmt yuv420p -an -movflags +faststart /Users/robertwalker/Sites/Claude/test-2/photos/IMG_7522.mp4)",
+      "Bash(/tmp/ffmpeg_bin/ffmpeg -i /Users/robertwalker/Sites/Claude/test-2/photos/IMG_7522.mov -vf scale=1280:-2 -c:v libvpx-vp9 -crf 33 -b:v 0 -an /Users/robertwalker/Sites/Claude/test-2/photos/IMG_7522.webm)"
     ]
   }
 }
