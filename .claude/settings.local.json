@@ -27,7 +27,15 @@
       "Bash(/Library/Developer/CommandLineTools/usr/bin/git push *)",
       "Bash(/Library/Developer/CommandLineTools/usr/bin/git add *)",
       "Bash(/Library/Developer/CommandLineTools/usr/bin/git commit *)",
-      "Bash(/Library/Developer/CommandLineTools/usr/bin/git pull *)"
+      "Bash(/Library/Developer/CommandLineTools/usr/bin/git pull *)",
+      "Bash(ffmpeg -version)",
+      "Bash(curl -sL https://evermeet.cx/ffmpeg/getrelease/ffmpeg/zip -o /tmp/ffmpeg.zip)",
+      "Bash(unzip -q /tmp/ffmpeg.zip -d /tmp/ffmpeg_bin)",
+      "Read(//tmp/**)",
+      "Bash(/tmp/ffmpeg_bin/ffmpeg -version)",
+      "Bash(/tmp/ffmpeg_bin/ffmpeg -i /Users/robertwalker/Sites/Claude/test-2/photos/IMG_4721.mov)",
+      "Bash(/tmp/ffmpeg_bin/ffmpeg -i /Users/robertwalker/Sites/Claude/test-2/photos/IMG_7522.mov)",
+      "Bash(/tmp/ffmpeg_bin/ffmpeg -i /Users/robertwalker/Sites/Claude/test-2/photos/IMG_4721.mov -vf scale=1280:-2 -c:v libvpx-vp9 -crf 33 -b:v 0 -an /Users/robertwalker/Sites/Claude/test-2/photos/IMG_4721.webm)"
     ]
   }
 }

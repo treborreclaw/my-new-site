@@ -787,7 +787,8 @@
       </div>
     </div>
     <div class="hero-image">
-      <img src="photos/IMG_5503.jpeg" alt="Oscar running in a field" />
+      <img id="hero-img" src="photos/IMG_5503.jpeg" alt="Oscar" />
+      <video id="hero-video" autoplay muted loop playsinline style="display:none;width:100%;height:100%;object-fit:cover;object-position:center 30%;"></video>
       <div class="hero-image-badge">
         <img src="photos/camphoto_126398554.jpeg" alt="Oscar close-up" class="avatar" />
         <div class="hero-image-badge-text">
@@ -998,18 +999,28 @@
   </footer>
 
   <script>
-    // Randomly rotate hero image on each page load
-    const heroPhotos = [
-      'photos/IMG_5503.jpeg',
-      'photos/IMG_5655.jpg',
-      'photos/IMG_5292.jpg',
-      'photos/IMG_5328.jpg',
-      'photos/IMG_4825.jpg',
-      'photos/camphoto_126398554.jpeg',
-      'photos/telegram-photo-0-5861736014164986734.jpeg'
+    // Randomly rotate hero image/video on each page load
+    const heroMedia = [
+      { type: 'image', src: 'photos/IMG_5503.jpeg' },
+      { type: 'image', src: 'photos/IMG_5655.jpg' },
+      { type: 'image', src: 'photos/IMG_5292.jpg' },
+      { type: 'image', src: 'photos/IMG_5328.jpg' },
+      { type: 'image', src: 'photos/IMG_4825.jpg' },
+      { type: 'image', src: 'photos/camphoto_126398554.jpeg' },
+      { type: 'image', src: 'photos/telegram-photo-0-5861736014164986734.jpeg' },
+      { type: 'video', mp4: 'photos/IMG_4721.mp4', webm: 'photos/IMG_4721.webm' }
     ];
-    const heroImg = document.querySelector('.hero-image img');
-    heroImg.src = heroPhotos[Math.floor(Math.random() * heroPhotos.length)];
+    const heroImg   = document.getElementById('hero-img');
+    const heroVideo = document.getElementById('hero-video');
+    const pick      = heroMedia[Math.floor(Math.random() * heroMedia.length)];
+    if (pick.type === 'video') {
+      heroImg.style.display = 'none';
+      heroVideo.style.display = 'block';
+      heroVideo.innerHTML = `<source src="${pick.webm}" type="video/webm"><source src="${pick.mp4}" type="video/mp4">`;
+      heroVideo.load();
+    } else {
+      heroImg.src = pick.src;
+    }
   </script>
 
   <script>
