@@ -82,8 +82,9 @@
     /* HERO */
     #hero {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 64px);
+      grid-template-columns: 1.2fr 0.8fr;
+      height: calc(100vh - 64px);
+      max-height: 780px;
       background: linear-gradient(135deg, #fdf0e0 0%, #fae3c8 100%);
     }
 
@@ -91,7 +92,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 80px 6% 80px 8%;
+      padding: 40px 6% 40px 8%;
     }
 
     .hero-badge {
@@ -103,7 +104,7 @@
       text-transform: uppercase;
       padding: 0.35rem 1rem;
       border-radius: 20px;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.2rem;
       font-family: sans-serif;
       width: fit-content;
     }
@@ -121,10 +122,10 @@
     }
 
     .hero-text p {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--text-light);
-      line-height: 1.75;
-      margin-bottom: 2.5rem;
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
       max-width: 440px;
     }
 

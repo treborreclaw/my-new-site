@@ -26,7 +26,8 @@
       "Bash(/Library/Developer/CommandLineTools/usr/bin/git config *)",
       "Bash(/Library/Developer/CommandLineTools/usr/bin/git push *)",
       "Bash(/Library/Developer/CommandLineTools/usr/bin/git add *)",
-      "Bash(/Library/Developer/CommandLineTools/usr/bin/git commit *)"
+      "Bash(/Library/Developer/CommandLineTools/usr/bin/git commit *)",
+      "Bash(/Library/Developer/CommandLineTools/usr/bin/git pull *)"
     ]
   }
 }
