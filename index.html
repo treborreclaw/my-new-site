@@ -998,6 +998,21 @@
   </footer>
 
   <script>
+    // Randomly rotate hero image on each page load
+    const heroPhotos = [
+      'photos/IMG_5503.jpeg',
+      'photos/IMG_5655.jpg',
+      'photos/IMG_5292.jpg',
+      'photos/IMG_5328.jpg',
+      'photos/IMG_4825.jpg',
+      'photos/camphoto_126398554.jpeg',
+      'photos/telegram-photo-0-5861736014164986734.jpeg'
+    ];
+    const heroImg = document.querySelector('.hero-image img');
+    heroImg.src = heroPhotos[Math.floor(Math.random() * heroPhotos.length)];
+  </script>
+
+  <script>
     const lightbox     = document.getElementById('lightbox');
     const lbImg        = document.getElementById('lightbox-img');
     const lbCaption    = document.getElementById('lightbox-caption');
